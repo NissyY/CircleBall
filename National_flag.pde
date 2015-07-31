@@ -1,10 +1,10 @@
 class National_flag {
   PImage japanimg;
-  float flagx = 40, flagy = 20, dx = 5, dy = 5;
+  float flagx = 80, flagy = 40, dx = 5, dy = 5;
 
 
   void Japanflag() {
-    if(gamestartflg==0){
+    if (gamecontrolflg==0) {
       return;
     }
     imageMode(CENTER);
