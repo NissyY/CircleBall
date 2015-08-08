@@ -1,16 +1,21 @@
+//敵 敵のレベル
+
 class Enemy {
   float enemyx, enemyy, r, dx, dy, dball; 
   Enemy(float addx, float addy, float addr, float adddx, float adddy, float addd) {
-    enemyx = addx;
-    enemyy = addy;
-    r = addr;
-    dx = adddx;
-    dy = adddy;
-    dball = addd;
+    enemyx = addx;//敵のx座標
+    enemyy = addy;//敵のy座標
+    r = addr;//敵の半径
+    dx = adddx;//敵のx方向の移動速度
+    dy = adddy;//敵のy方向の移動速度
+    dball = addd;//敵の半径の変化速度
   }
 
-
+  //敵の初期レベル 壁に跳ねるだけ
   void Enemylevel1() {
+    if (ball.touchflg == 3) {
+      return;
+    }
     fill(0);
     ellipse(enemyx, enemyy, r, r);
 
@@ -21,7 +26,7 @@ class Enemy {
       dx = random(3, 8);
       other.score++;
     }
-    if(enemyx>1170){
+    if (enemyx>1170) {
       dx = -random(3, 8);
       other.score++;
     }
@@ -29,13 +34,18 @@ class Enemy {
       dy = random(3, 8);
       other.score++;
     }
-    if(enemyy>670){
+    if (enemyy>670) {
       dy = -random(3, 8);
       other.score++;
     }
   }
-  
+  //敵のレベル2 半径が変動する
   void Enemylevel2() {
+
+    if (ball.touchflg == 3) {
+      return;
+    }    
+
     for (int i = 0; i <= 4; i++) {
       enemy[i].r = enemy[i].r + dball;
     }
@@ -45,7 +55,6 @@ class Enemy {
     if (r >= 50) {
       dball = -dball;
     }
-    
   }
 }
 
