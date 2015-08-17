@@ -13,7 +13,7 @@ class Enemy {
 
   //敵の初期レベル 壁に跳ねるだけ
   void Enemylevel1() {
-    if (ball.touchflg == 3) {
+    if (other.touchflg == 3) {
       return;
     }
     fill(0);
@@ -42,7 +42,7 @@ class Enemy {
   //敵のレベル2 半径が変動する
   void Enemylevel2() {
 
-    if (ball.touchflg == 3) {
+    if (other.touchflg == 3) {
       return;
     }    
 

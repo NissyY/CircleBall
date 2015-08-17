@@ -2,28 +2,26 @@
 
 class Other {
   int score = 0;
-  int levelscore[] = {
-    1, 3, 5, 8, 15
-  };
+  int levelscore[] = { 1, 3, 5, 8, 15};
   int life = 3;
-  int l[] = { 
-    300, 300, 300
-  };//ライフの赤丸の初期透明度
+  int l[] = { 300, 300, 300};//ライフの赤丸の初期透明度
+  int touchflg = 0;
+  
   //タイトル画面のスタートボタン
   void titleframe() {
-    if (gamecontrolflg != 0) {
+    if (gamecontrolflg != 0) {//gamecontrolflg=0はタイトル画面のこと
       return;
     }
-    ball.titleball1();
+    redball.titleball1();
     subfont = loadFont("ACaslonPro-Italic-48.vlw");
     textAlign(CENTER);
     textSize(48);
-    if (475<mouseX&&mouseX<720&&300<mouseY&&mouseY<360) {
-      fill(255, 240, 0);
+    if (475<mouseX&&mouseX<720&&300<mouseY&&mouseY<360) {//Circle Ballの文字の範囲
+      fill(255, 240, 0);//クリックできるとわかるように色変更
       text("Circle Ball", width/2, height/2);
       if (mousePressed) {
-        gamecontrolflg=1;
-        ball.touchflg = 0;//ゲームオーバからタイトルに戻った際の当たった回数リセット
+        gamecontrolflg=1;//プレイ画面へ遷移
+        touchflg = 0;//ゲームオーバからタイトルに戻った際の当たった回数リセット
         score = 0;//上と同様スコアもリセット
       }
     } else {
@@ -52,21 +50,17 @@ class Other {
     ellipse(1180, 20, 20, 20);
 
     //当たる度左から順に透明化させる
-    if (ball.touchflg >= 1) {
+    if (touchflg >= 1) {
       l[0] = 0;
     }
-    if (ball.touchflg >= 2) {
+    if (touchflg >= 2) {
       l[1] = 0;
     }
-    if (ball.touchflg >= 3) {
+    if (touchflg >= 3) {
       l[2] = 0;
       gamecontrolflg = 2;
     }
-    if (gamecontrolflg == 0) {
-      l[0] = 300;
-      l[1] = 300;
-      l[2] = 300;
-    }
+
 
     Score();
   }
@@ -95,16 +89,19 @@ class Other {
       text("title", width/1.5, height/1.5);
       if (mousePressed) {
         gamecontrolflg = 0;
+        l[0] = 300;
+        l[1] = 300;
+        l[2] = 300;
       }
     }
 
     //２回当たったら
-    if (ball.touchflg==2) {
+    if (touchflg==2) {
       background(0);
       gamecontrolflg = 0;//タイトル画面へ移動
       enemycount = 0;//敵の数を0に戻す
       level = 1;//レベルを初期化
-      ball.touchflg = 0;
+      touchflg = 0;
     }
   }
 
@@ -115,17 +112,17 @@ class Other {
 
   void enemyappear() {
 
-    if (other.score>=1) {
+    if (score>=1) {
       enemy[1].Enemylevel1();
       level = 2;
       enemycount = 2;
     }
-    if (other.score>=3) {
+    if (score>=3) {
       enemy[0].Enemylevel2();
       enemy[1].Enemylevel2();
       level = 3;
     }
-    if (other.score>=8) {
+    if (score>=8) {
       enemy[2].Enemylevel1();
       enemy[2].Enemylevel2();
       national_flag.Japanflag();
@@ -133,7 +130,7 @@ class Other {
       level = 4;
       enemycount = 3;
     }
-    if (other.score>=15) {
+    if (score>=15) {
       enemy[3].Enemylevel1();
       enemy[3].Enemylevel2();
       enemy[4].Enemylevel1();
@@ -141,6 +138,29 @@ class Other {
       level = 5;
       enemycount = 5;
     }
+  }
+  
+  
+  
+  //ゲームの実行
+  void Game(){
+    if (gamecontrolflg==1) {//クリックしたらボールを自分で動かす。敵を１体出す。
+    if (gamecontrolflg != 1) {//クリックしなかったらreturn;
+      return;
+    }
+    //ライフ スコア 自分を描画
+    redball.playerball1();
+    blueball.playerball2();
+    enemy[0].Enemylevel1();
+    Life();
+  }
+
+  if (gamecontrolflg == 2) {
+    GameOver();
+  }
+
+  //敵のレベルアップ
+  enemyappear();
   }
 }
 
