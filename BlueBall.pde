@@ -4,8 +4,6 @@ class BlueBall {
   private float ballx, bally, r, theta;
   private int O;
   private float enemydis1[] = {0, 0, 0, 0, 0, 0};//プレーヤーと敵の距離（敵５体分の配列）
-//  private float enemydis2[] = {0, 0, 0, 0, 0, 0};
-//  private int touchflg = 0;//敵に当たった回数を管理
 
 
 
@@ -18,57 +16,49 @@ class BlueBall {
     O = o;//円移動に必要な値
   }
 
-  //タイトル画面の自動で回転するボール
-
-//  void titleball1() {
-//
-//    noStroke();
-//    fill(255, 0, 0);
-//    ellipse(ballx + 600, bally + 350, r, r);
-//    theta -= 0.05;
-//    ballx = O * cos(theta);
-//    bally = O * sin(theta);
-//
-//    titleball2();
-//  }
-//
-//  //もう片方のタイトルボール
-//
-//  void titleball2() {
-//
-//    fill(0, 0, 255);
-//    ellipse(ballx + 600, bally + 350, r, r);
-//    ballx = O * -cos(theta);
-//    bally = O * -sin(theta);
-//
-//    national_flag.itemeffect();
-//  }
-
 
 
 
   //ゲームプレイ中のボール 
-//
-//  void playerball1() {
-//
-//    fill(255, 0, 0);
-//    ellipse(ballx + 600, bally + 350, r, r);
-//    ballx = O * cos(theta);
-//    bally = O * sin(theta);
-//    playerball2();
-//  }
+  //
+  //  void playerball1() {
+  //
+  //    fill(255, 0, 0);
+  //    ellipse(ballx + 600, bally + 350, r, r);
+  //    ballx = O * cos(theta);
+  //    bally = O * sin(theta);
+  //    playerball2();
+  //  }
 
   //もう片方のゲームプレイ中のボール
 
   void playerball2() {
 
+
     fill(0, 0, 255);
+    ellipse(ballx + 600, bally + 350, r, r);
+    ballx = O * cos(theta);
+    bally = O * sin(theta);
+    touch();
+
+    if (national_flag.itemflg == 1) {
+      stroke(255, 255, 0);
+      strokeWeight(5);
+      noFill();
+      ellipse(ballx + 600, bally + 350, r, r);
+      noStroke();
+    }
+  }
+
+  void titleball2() {
+
+    fill(255, 0, 0);
     ellipse(ballx + 600, bally + 350, r, r);
     ballx = O * -cos(theta);
     bally = O * -sin(theta);
-    touch();
+    theta -= 0.05;
+    national_flag.itemeffect();
   }
-
 
 
   //jを押した際の右回転用
@@ -144,6 +134,7 @@ class BlueBall {
   //アイテム効果あり時を含めた あたり判定詳細処理
   void subtouch() {
     if (national_flag.itemflg == 1) {
+
       national_flag.itemflg = 0;
       return;
     }

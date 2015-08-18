@@ -6,7 +6,12 @@ class Other {
   int life = 3;
   int l[] = { 300, 300, 300};//ライフの赤丸の初期透明度
   int touchflg = 0;
-  
+  String s0 = "You still have lots more to work on…";
+  String s1 ="OK !";
+  String s2 ="Nice !";
+  String s3 ="Great !";
+  String s4 ="You Are God !";
+
   //タイトル画面のスタートボタン
   void titleframe() {
     if (gamecontrolflg != 0) {//gamecontrolflg=0はタイトル画面のこと
@@ -81,6 +86,18 @@ class Other {
     text("Score : " + score, width/4, height/1.5);
     fill(0);
     text("title", width/1.5, height/1.5);
+    
+    if(0 < score && score < 30){
+      text(s0, width/2, height/1.3);
+    }else if(30 < score && score < 100){
+      text(s1, width/2, height/1.3);
+    }else if(100 < score && score < 200){
+      text(s2, width/2, height/1.3);
+    }else if(200 < score && score < 300){
+      text(s3, width/2, height/1.3);
+    }else if(300 < score && score < 500){
+      text(s4, width/2, height/1.3);
+    }
 
 
     //タイトルへ戻るボタン

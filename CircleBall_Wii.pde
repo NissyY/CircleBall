@@ -30,7 +30,8 @@ void setup() {
 void draw() {
 
   //確認用println 最後に消す
-  println(other.touchflg);
+//  println(redball.ballx, redball.bally);
+
 
   background(255);
   other.titleframe();//実行時、最初にタイトル画面描画

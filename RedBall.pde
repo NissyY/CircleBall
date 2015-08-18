@@ -4,8 +4,6 @@ class RedBall {
   private float ballx, bally, r, theta;
   private int O;
   private float enemydis1[] = {0, 0, 0, 0, 0, 0};//プレーヤーと敵の距離（敵５体分の配列）
-//  private float enemydis2[] = {0, 0, 0, 0, 0, 0};
-//  private int touchflg = 0;//敵に当たった回数を管理
 
 
 
@@ -21,28 +19,28 @@ class RedBall {
   //タイトル画面の自動で回転するボール
 
   void titleball1() {
-
+    
     noStroke();
-    fill(255, 0, 0);
+    fill(0, 0, 255);
     ellipse(ballx + 600, bally + 350, r, r);
     theta -= 0.05;
     ballx = O * cos(theta);
     bally = O * sin(theta);
 
-    titleball2();
+    blueball.titleball2();
   }
 
   //もう片方のタイトルボール
 
-  void titleball2() {
-
-    fill(0, 0, 255);
-    ellipse(ballx + 600, bally + 350, r, r);
-    ballx = O * -cos(theta);
-    bally = O * -sin(theta);
-
-    national_flag.itemeffect();
-  }
+//  void titleball2() {
+//
+//    fill(0, 0, 255);
+//    ellipse(ballx + 600, bally + 350, r, r);
+//    ballx = O * -cos(theta);
+//    bally = O * -sin(theta);
+//
+//    national_flag.itemeffect();
+//  }
 
 
 
@@ -50,12 +48,22 @@ class RedBall {
   //ゲームプレイ中のボール 
 
   void playerball1() {
-
+    
+    noStroke();
     fill(255, 0, 0);
     ellipse(ballx + 600, bally + 350, r, r);
-    ballx = O * cos(theta);
-    bally = O * sin(theta);
+    ballx = O * -cos(theta);
+    bally = O * -sin(theta);
     touch();
+    
+    //シールドエフェクト
+    if(national_flag.itemflg == 1){
+      stroke(255, 255, 0);
+      strokeWeight(5);
+      noFill();
+      ellipse(ballx + 600, bally + 350, r, r);
+      noStroke();
+    }
 //    playerball();
   }
 
@@ -93,7 +101,6 @@ class RedBall {
     //敵5体それぞれとプレーヤーとの距離をenemydis[0]~dis[4]に格納
     for (int i = 0; i < enemycount; i++) {
       enemydis1[i] = dist(ballx + 600, bally + 350, enemy[i].enemyx, enemy[i].enemyy);
-      //enemydis2[i] = dist(ballx + 600, ball2y + 350, enemy[i].enemyx, enemy[i].enemyy);
     }
 
     //敵の中心とプレーヤーの中心との距離が30(変動している分も加算する)より小さければ読み込む
