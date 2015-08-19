@@ -1,3 +1,7 @@
+import com.onformative.leap.LeapMotionP5;
+LeapMotionP5 leap;
+
+
 
 RedBall redball;//タイトルとプレーヤーとなるボール
 BlueBall blueball;
@@ -15,6 +19,8 @@ void setup() {
   smooth();
   colorMode(RGB);
   fill(0);
+
+  leap = new LeapMotionP5(this);
 
   redball = new RedBall(600, 450, 30, 0.25, 150);
   blueball = new BlueBall(600, 450, 30, 0.25, 150);

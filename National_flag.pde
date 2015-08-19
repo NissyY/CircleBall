@@ -41,8 +41,14 @@ class National_flag {
 
   void itemeffect() {
     
-    itemdis1 = dist(redball.ballx + 600, redball.bally + 350, japanflagx, japanflagy);
-    itemdis2 = dist(blueball.ballx + 600, blueball.bally + 350, japanflagx, japanflagy);
+    PVector fingerPos = leap.getTip(leap.getFinger(0));
+    itemdis1 = dist(fingerPos.x, fingerPos.y, japanflagx, japanflagy);
+
+    PVector fingerPos1 = leap.getTip(leap.getFinger(4));
+    itemdis2 = dist(fingerPos1.x, fingerPos1.y, japanflagx, japanflagy);
+
+//    itemdis1 = dist(redball.ballx + 600, redball.bally + 350, japanflagx, japanflagy);
+//    itemdis2 = dist(blueball.ballx + 600, blueball.bally + 350, japanflagx, japanflagy);
     if (itemdis1 < 50 || itemdis2 < 50) {
       itemflg = 1;//日本の国旗をゲットしたらバリア展開（1回だけ敵に当たっても防ぐ）
       

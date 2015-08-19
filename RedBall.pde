@@ -4,7 +4,7 @@ class RedBall {
   private float ballx, bally, r, theta;
   private int O;
   private float enemydis1[] = {0, 0, 0, 0, 0, 0};//プレーヤーと敵の距離（敵５体分の配列）
-
+  
 
 
   RedBall(float x, float y, float R, float t, int o) {
@@ -51,7 +51,10 @@ class RedBall {
     
     noStroke();
     fill(255, 0, 0);
-    ellipse(ballx + 600, bally + 350, r, r);
+    PVector fingerPos = leap.getTip(leap.getFinger(4));
+    ellipse(fingerPos.x, fingerPos.y, 30, 30);
+
+    //ellipse(ballx + 600, bally + 350, r, r);
     ballx = O * -cos(theta);
     bally = O * -sin(theta);
     touch();
@@ -61,7 +64,8 @@ class RedBall {
       stroke(255, 255, 0);
       strokeWeight(5);
       noFill();
-      ellipse(ballx + 600, bally + 350, r, r);
+      ellipse(fingerPos.x, fingerPos.y, r, r);
+//      ellipse(ballx + 600, bally + 350, r, r);
       noStroke();
     }
 //    playerball();
@@ -100,7 +104,9 @@ class RedBall {
   void touch() {
     //敵5体それぞれとプレーヤーとの距離をenemydis[0]~dis[4]に格納
     for (int i = 0; i < enemycount; i++) {
-      enemydis1[i] = dist(ballx + 600, bally + 350, enemy[i].enemyx, enemy[i].enemyy);
+      PVector fingerPos = leap.getTip(leap.getFinger(4));
+      enemydis1[i] = dist(fingerPos.x, fingerPos.y, enemy[i].enemyx, enemy[i].enemyy);
+      //enemydis1[i] = dist(ballx + 600, bally + 350, enemy[i].enemyx, enemy[i].enemyy);
     }
 
     //敵の中心とプレーヤーの中心との距離が30(変動している分も加算する)より小さければ読み込む
