@@ -56,7 +56,8 @@ void keyPressed() {
     }
     if (key=='f') {
       redball.Left();
-      blueball.Left();    }
+      blueball.Left();
+    }
   }
 }
 
