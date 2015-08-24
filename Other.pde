@@ -142,8 +142,8 @@ class Other {
     if (score>=8) {
       enemy[2].Enemylevel1();
       enemy[2].Enemylevel2();
-      national_flag.Japanflag();
-      national_flag.Move_National_flag();
+      itemball.Japanflag();
+      itemball.Move_itemball();
       level = 4;
       enemycount = 3;
     }

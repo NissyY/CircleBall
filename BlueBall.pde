@@ -44,7 +44,7 @@ class BlueBall {
     bally = O * sin(theta);
     touch();
 
-    if (national_flag.itemflg == 1) {
+    if (itemball.itemflg == 1) {
       stroke(255, 255, 0);
       strokeWeight(5);
       noFill();
@@ -61,7 +61,7 @@ class BlueBall {
     ballx = O * -cos(theta);
     bally = O * -sin(theta);
     theta -= 0.05;
-    national_flag.itemeffect();
+    itemball.itemeffect();
   }
 
 
@@ -129,19 +129,19 @@ class BlueBall {
     }
 
     if (other.score >= 8) {
-      if (national_flag.itemflg > 1) {
+      if (itemball.itemflg > 1) {
         return;
       }
-      national_flag.itemeffect();
+      itemball.itemeffect();
     }
   }
 
 
   //アイテム効果あり時を含めた あたり判定詳細処理
   void subtouch() {
-    if (national_flag.itemflg == 1) {
+    if (itemball.itemflg == 1) {
 
-      national_flag.itemflg = 0;
+      itemball.itemflg = 0;
       return;
     }
     other.touchflg++;

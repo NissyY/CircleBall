@@ -7,7 +7,7 @@ RedBall redball;//タイトルとプレーヤーとなるボール
 BlueBall blueball;
 Enemy[] enemy = new Enemy[5];//敵は最大出現
 Other other;//その他の機能
-National_flag national_flag;//テーマの国はアイテムとして出現
+ItemBall itemball;//テーマの国はアイテムとして出現
 
 int gamecontrolflg = 0;//タイトル、プレイ画面、ゲームオーバー画面のコントロール用flg
 int enemycount = 1;//敵の数を示す
@@ -29,7 +29,7 @@ void setup() {
     enemy[i] = new Enemy(random(40, 1100), 50, 30, random(3, 5), random(3, 5), 0.25);
   }
 
-  national_flag = new National_flag();
+  itemball = new ItemBall(600, 450, 30);
   other = new Other();
 }
 
